@@ -9,6 +9,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.11.0"
+  auto_route:
+    dependency: "direct main"
+    description:
+      name: auto_route
+      sha256: b83e8ce46da7228cdd019b5a11205454847f0a971bca59a7529b98df9876889b
+      url: "https://pub.dev"
+    source: hosted
+    version: "9.2.2"
   boolean_selector:
     dependency: transitive
     description:
@@ -208,6 +216,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "14.2.5"
+  web:
+    dependency: transitive
+    description:
+      name: web
+      sha256: cd3543bd5798f6ad290ea73d210f423502e71900302dde696f8bff84bf89a1cb
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
 sdks:
-  dart: ">=3.5.3 <4.0.0"
+  dart: ">=3.5.1 <4.0.0"
   flutter: ">=3.18.0-18.0.pre.54"
