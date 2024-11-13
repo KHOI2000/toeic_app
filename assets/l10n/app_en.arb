@@ -1,0 +1,19 @@
+{
+    "english": "English",
+    "vietnamese": "Vietnamese",
+    "errorHappened": "Error happened",
+    "routeNotFound": "Route not found",
+    "unknownError": "Unknown Error",
+    "notice": "Notice",
+    "ok": "OK",
+    "signIn": "Sign In",
+    "signInWithGoogle": "Sign In With Google",
+    "signUp": "signUp",
+    "forgotPassword": "Forgot your password?",
+    "noAccount": "No account yet?",
+    "email": "Email",
+    "password": "Password",
+    "or": "OR",
+    "male": "Male",
+    "female": "Female"
+}

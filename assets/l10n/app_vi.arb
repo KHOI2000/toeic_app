@@ -1,0 +1,19 @@
+{
+    "english": "Tiếng Anh",
+    "vietnamese": "Tiếng Việt",
+    "errorHappened": "Có lỗi xảy ra",
+    "routeNotFound": "Đường dẫn không tồn tại",
+    "unknownError": "Lỗi không xác định",
+    "notice": "Thông báo",
+    "ok": "OK",
+    "signIn": "Đăng nhập",
+    "signInWithGoogle": "Đăng nhập với Google",
+    "signUp": "Đăng Ký",
+    "forgotPassword": "Quên mật khẩu",
+    "noAccount": "Chưa có tài khoản",
+    "email": "Tài khoản",
+    "password": "Mật khẩu",
+    "or": "Hoặc",
+    "male": "Nam",
+    "female": "Nữ"
+}

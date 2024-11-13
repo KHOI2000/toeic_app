@@ -1,76 +1,77 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'app/config/app_vm.dart';
+import 'common/constant/app_constant.dart';
+import 'common/enum/theme_code.dart';
+import 'di/locator.dart';
+import 'di/locator_shorten.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  configureDependencies();
+  ThemeCode theme = await getInitialTheme();
+  Locale locale = await getInitialLocale();
+  runApp(MyApp(
+    theme: theme,
+    locale: locale,
+  ));
+}
+
+Future<ThemeCode> getInitialTheme() async {
+  String? theme = await AppLocator.storage.readItem(AppConstant.themeMode);
+  if (theme == 'dark') {
+    return ThemeCode.dark;
+  }
+  return ThemeCode.light;
+}
+
+Future<Locale> getInitialLocale() async {
+  String? languageCode = await AppLocator.storage.readItem(AppConstant.languageMode);
+  return languageCode != null ? Locale(languageCode) : const Locale('en');
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final ThemeCode theme;
+  final Locale locale;
 
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'Flutter Demo',
-      home: LoginScreen(),
-    );
-  }
-}
-
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
-
-  @override
-  _LoginScreenState createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+  const MyApp({super.key, required this.theme, required this.locale});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Login'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextField(
-              controller: _emailController,
-              decoration: const InputDecoration(
-                labelText: 'Email',
-                border: OutlineInputBorder(),
-              ),
-              keyboardType: TextInputType.emailAddress,
-            ),
-            const SizedBox(height: 20),
-            TextField(
-              controller: _passwordController,
-              decoration: const InputDecoration(
-                labelText: 'Password',
-                border: OutlineInputBorder(),
-              ),
-              obscureText: true,
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                // You can add authentication logic here
-                String email = _emailController.text;
-                String password = _passwordController.text;
-                // For now, just print the email and password
-                print('Email: $email');
-                print('Password: $password');
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider<AppVM>(
+              create: (context) => AppVM(
+                  locale: locale,
+                  // locale: const Locale('vi'),
+                  themeCode: theme)),
+        ],
+        child: Consumer<AppVM>(
+          builder: (context, vm, child) {
+            return MaterialApp.router(
+              debugShowCheckedModeBanner: false,
+              title: 'TOEIC-APP',
+              routerConfig: AppLocator.router.config(),
+              locale: vm.locale,
+              theme: vm.appTheme,
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              supportedLocales: const [
+                Locale('en'),
+                Locale('vi')
+              ],
+              builder: (context, child) {
+                return GestureDetector(
+                  onTap: () {
+                    FocusManager.instance.primaryFocus?.unfocus();
+                  },
+                  child: child!,
+                );
               },
-              child: const Text('Login'),
-            ),
-          ],
-        ),
-      ),
-    );
+            );
+          },
+        ));
   }
 }

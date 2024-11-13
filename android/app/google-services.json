@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "117961358306",
+    "project_id": "toeic-app-bde86",
+    "storage_bucket": "toeic-app-bde86.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:117961358306:android:4b559eb42b64c583e1d7bb",
+        "android_client_info": {
+          "package_name": "com.example.toeic_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzt_se4w3UlOtYX4MPwjv_LqrYmA8guwo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
